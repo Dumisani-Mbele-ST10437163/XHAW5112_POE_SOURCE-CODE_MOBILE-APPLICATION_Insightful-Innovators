@@ -1,5 +1,5 @@
 # XHAW5112_POE_WEBSITE_Insightful-Innovators
-Insightful Innovators POE for the website 
+Insightful Innovators POE for the application 
 
 Group Members: 
 
