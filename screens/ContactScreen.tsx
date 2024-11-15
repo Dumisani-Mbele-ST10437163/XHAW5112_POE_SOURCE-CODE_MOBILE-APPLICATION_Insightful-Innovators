@@ -3,6 +3,8 @@ import { Image, StyleSheet, View, Text } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Picker } from '@react-native-picker/picker';
+
 
 
 const ContactScreen = () => {
@@ -12,6 +14,41 @@ const ContactScreen = () => {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+  const [selectedLocation, setSelectedLocation] = useState("current");
+
+  const riverleaRegion = {
+    latitude: -26.21326007707098,
+    longitude: 27.97549517430856,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+
+  const glenhazelRegion = {
+    latitude: -26.141380677115325,
+    longitude: 28.103846274305415,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
+  };
+  const handleLocationChange = (location: string) => {
+    setSelectedLocation(location);
+    switch (location) {
+      case "current":
+        setMapRegion({
+          latitude: -26.192782337723795,
+          longitude: 28.03078250072178,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+        break;
+      case "riverlea":
+        setMapRegion(riverleaRegion);
+        break;
+      case "glenhazel":
+        setMapRegion(glenhazelRegion);
+        break;
+    }
+  };
+
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -21,12 +58,11 @@ const ContactScreen = () => {
         style={styles.background}
       />
 
-      <View style={styles.logoContainer}>
+<View style={styles.logoContainer}>
         <Image source={require('../img/logos/logo_noBG.png')} style={styles.logoImage} />
         <Text style={styles.logoText}>Empowering The Nation</Text>
       </View>
 
-    
       <View style={styles.contactInfoContainer}>
         <Text style={styles.heading1}>Contact Us</Text>
 
@@ -38,21 +74,41 @@ const ContactScreen = () => {
         <Text style={styles.text}>info@empoweringthenation.co.za</Text>
       </View>
 
-      <View style={styles.mapWrapper}>
-        <MapView style={styles.map} region={mapRegion}>
-          <Marker coordinate={mapRegion} title="Marker" />
-        </MapView>
+      <View style={styles.pickerContainer}>
+        <Text style={styles.heading2}>Select Location:</Text>
+        <Picker
+          selectedValue={selectedLocation}
+          onValueChange={(value) => handleLocationChange(value)}
+          style={styles.picker}
+        >
+          <Picker.Item label="Current Location" value="current" />
+          <Picker.Item label="Riverlea" value="riverlea" />
+          <Picker.Item label="Glenhazel" value="glenhazel" />
+        </Picker>
       </View>
 
-
+      <View style={styles.mapWrapper}>
+        <MapView style={styles.map} region={mapRegion}>
+          <Marker coordinate={mapRegion} title="Selected Location" />
+        </MapView>
+      </View>
     </SafeAreaView>
   );
 };
+
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     backgroundColor: '#E3F2FD',
+  },
+  pickerContainer: {
+    marginHorizontal: 20,
+    marginBottom: 10,
+  },
+  picker: {
+    height: 50,
+    width: '100%',
   },
   logoContainer: {
     flexDirection: 'row',

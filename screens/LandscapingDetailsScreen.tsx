@@ -1,21 +1,23 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView, Image } from 'react-native'; // Added Image
+import { StyleSheet, View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native'; // Added Image
 import { LinearGradient } from 'expo-linear-gradient';
-
-const LandscapingDetailsScreen = () => {
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from './RootStackParams';
+type courseScreenProp = StackNavigationProp<RootStackParamList, 'CalculateScreen'>;
+const LandscapingDetailScreen = () => {
+  const navigation = useNavigation<courseScreenProp>();
   return (
     <SafeAreaView style={styles.container}>
-
-        <LinearGradient
+      <LinearGradient
           // Adjusted Background Linear Gradient
           colors={['#c6ffbd', '#80aedc']}
           style={styles.background}
         />
-
       <View style={styles.content}>
       <View style={styles.logoContainer}>
   {/* Replace Ionicons with Image */}
-  <Image source={require('../_img/logo.png')} style={styles.logoImage} />
+  <Image source={require('../img/logo_noBG.png')}style={styles.logoImage} />
   <Text style={styles.logoText}>Empowering The Nation</Text>
 </View>
 
@@ -27,28 +29,28 @@ const LandscapingDetailsScreen = () => {
           <Text style={styles.feeAmount}>R1500</Text>
         </View>
         
-        <View style={styles.feeContainer}>
-          <Text style={styles.feeLabel}>Length: </Text>
-          <Text style={styles.feeAmount}>6-Months</Text>
-        </View>
-
         <View style={styles.purposeContainer}>
           <Text style={styles.sectionTitle}>Purpose:</Text>
           <Text style={styles.purposeText}>
-          Provide landscaping services for new & established gardens
+            To Arovide Alterations and New Garment tailoring services
           </Text>
         </View>
         
         <View style={styles.learningContainer}>
           <Text style={styles.sectionTitle}>What You'll Learn:</Text>
           <View style={styles.bulletPoints}>
-            <Text style={styles.bulletPoint}>• Indigenous + exotic plants & trees</Text>
-            <Text style={styles.bulletPoint}>• Fixed structures e.g. fountains, statues, trenches, tables etc.</Text>
-            <Text style={styles.bulletPoint}>• Balancing of plants and trees in a garden</Text>
-            <Text style={styles.bulletPoint}>• Aesthetics of plants, shapes & colors</Text>
-            <Text style={styles.bulletPoint}>• Garden layout</Text>
+            <Text style={styles.bulletPoint}>• Types of stitches</Text>
+            <Text style={styles.bulletPoint}>• Threading a sewing Machine</Text>
+            <Text style={styles.bulletPoint}>• Sewing buttons, zips, hems, seams</Text>
+            <Text style={styles.bulletPoint}>• Alterations</Text>
+            <Text style={styles.bulletPoint}>• Designing and sewing new garments</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.textColor} onPress={() => {
+        navigation.navigate('CalculateScreen')
+      }}>
+        <Text style={{color: 'white'}}> Calculate Fees</Text>
+      </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -68,12 +70,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   logoImage: {
-    width: 60,                 // Adjust the size as needed
+    width: 80,                 // Adjust the size as needed
     height: 80,                // Adjust the size as needed
     marginRight: 10,           // Space between the logo and the text
   },
   logoText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#07416d',
   },
@@ -87,11 +89,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
   },
-  feeAmount: {
-    fontSize: 16,
-    color: '#07416d', 
-  },
   feeLabel: {
+    fontSize: 16,
+    color: '#00609e', 
+  },
+  feeAmount: {
     fontSize: 16,
     fontWeight: 'bold',
     color:'#07416d',
@@ -107,11 +109,11 @@ const styles = StyleSheet.create({
   },
   purposeText: {
     fontSize: 16,
-    color: '#07416d',
+    color: '#00609e',
   },
   learningContainer: {
     marginBottom: 20,
-    color: '#07416d',
+    color: '#00609e',
 
   },
   bulletPoints: {
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
   bulletPoint: {
     fontSize: 16,
     marginBottom: 5,
-    color: '#07416d',
+    color: '#00609e',
   },
   background: {
     position: 'absolute',
@@ -130,6 +132,13 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
   },
+  textColor: {
+    marginTop: 80,
+    marginHorizontal: 130, 
+    backgroundColor: '#115b8f',
+    padding: 6,
+    borderRadius: 5
+},
 });
 
-export default LandscapingDetailsScreen;
+export default LandscapingDetailScreen;

@@ -97,6 +97,12 @@ function CoursesStack() {
           headerShown: true, // Ensure header is shown
         }}
       />
+
+      <Stack.Screen 
+        name="CalculateScreen" 
+        component={CalculateScreen}
+      />
+      
     </Stack.Navigator>
   );
 }

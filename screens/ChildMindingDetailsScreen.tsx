@@ -1,48 +1,56 @@
 import React from 'react';
-import { StyleSheet, View, Text, SafeAreaView, Image } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, Image, TouchableOpacity } from 'react-native'; // Added Image
 import { LinearGradient } from 'expo-linear-gradient';
-
-const GardenMaintenanceDetailsScreen = () => {
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from './RootStackParams';
+type courseScreenProp = StackNavigationProp<RootStackParamList, 'CalculateScreen'>;
+const ChildMindingDetailScreen = () => {
+  const navigation = useNavigation<courseScreenProp>();
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#c6ffbd', '#80aedc']}
-        style={styles.background}
-      />
+          // Adjusted Background Linear Gradient
+          colors={['#c6ffbd', '#80aedc']}
+          style={styles.background}
+        />
       <View style={styles.content}>
-        <View style={styles.logoContainer}>
-          <Image source={require('../_img/logo.png')} style={styles.logoImage} />
-          <Text style={styles.logoText}>Empowering The Nation</Text>
-        </View>
+      <View style={styles.logoContainer}>
+  {/* Replace Ionicons with Image */}
+  <Image source={require('../img/logo_noBG.png')} style={styles.logoImage} />
+  <Text style={styles.logoText}>Empowering The Nation</Text>
+</View>
+
         
-        <Text style={styles.title}>Child-Minding</Text>
+        <Text style={styles.title}>Child Minding</Text>
         
         <View style={styles.feeContainer}>
           <Text style={styles.feeLabel}>Fees: </Text>
-          <Text style={styles.feeAmount}>R750</Text>
+          <Text style={styles.feeAmount}>R1500</Text>
         </View>
         
-        <View style={styles.feeContainer}>
-          <Text style={styles.feeLabel}>Length: </Text>
-          <Text style={styles.feeAmount}>6-Weeks</Text>
-        </View>
-
         <View style={styles.purposeContainer}>
           <Text style={styles.sectionTitle}>Purpose:</Text>
           <Text style={styles.purposeText}>
-            To provide basic child and baby care
+            To Arovide Alterations and New Garment tailoring services
           </Text>
         </View>
         
         <View style={styles.learningContainer}>
           <Text style={styles.sectionTitle}>What You'll Learn:</Text>
           <View style={styles.bulletPoints}>
-            <Text style={styles.bulletPoint}>•  0-6Month baby needs</Text>
-            <Text style={styles.bulletPoint}>• 7Months-1Year baby needs</Text>
-            <Text style={styles.bulletPoint}>• Toddler needs</Text>
-            <Text style={styles.bulletPoint}>• Educational toys</Text>
+            <Text style={styles.bulletPoint}>• Types of stitches</Text>
+            <Text style={styles.bulletPoint}>• Threading a sewing Machine</Text>
+            <Text style={styles.bulletPoint}>• Sewing buttons, zips, hems, seams</Text>
+            <Text style={styles.bulletPoint}>• Alterations</Text>
+            <Text style={styles.bulletPoint}>• Designing and sewing new garments</Text>
           </View>
         </View>
+        <TouchableOpacity style={styles.textColor} onPress={() => {
+        navigation.navigate('CalculateScreen')
+      }}>
+        <Text style={{color: 'white'}}> Calculate Fees</Text>
+      </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
@@ -51,23 +59,23 @@ const GardenMaintenanceDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#E3F2FD',
   },
   content: {
-    flex: 1,
     padding: 20,
   },
   logoContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'row',       // Horizontal alignment
+    alignItems: 'center',       // Vertical alignment
     marginBottom: 20,
   },
   logoImage: {
-    width: 80,
-    height: 80,
-    marginRight: 10,
+    width: 80,                 // Adjust the size as needed
+    height: 80,                // Adjust the size as needed
+    marginRight: 10,           // Space between the logo and the text
   },
   logoText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#07416d',
   },
@@ -81,11 +89,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
   },
-  feeAmount: {
-    fontSize: 16,
-    color: '#07416d', 
-  },
   feeLabel: {
+    fontSize: 16,
+    color: '#00609e', 
+  },
+  feeAmount: {
     fontSize: 16,
     fontWeight: 'bold',
     color:'#07416d',
@@ -101,18 +109,21 @@ const styles = StyleSheet.create({
   },
   purposeText: {
     fontSize: 16,
-    color: '#07416d',
+    color: '#00609e',
   },
   learningContainer: {
     marginBottom: 20,
+    color: '#00609e',
+
   },
   bulletPoints: {
     marginLeft: 10,
+    
   },
   bulletPoint: {
     fontSize: 16,
     marginBottom: 5,
-    color: '#07416d',
+    color: '#00609e',
   },
   background: {
     position: 'absolute',
@@ -120,8 +131,14 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     bottom: 0,
-    flex: 1,
   },
+  textColor: {
+    marginTop: 80,
+    marginHorizontal: 130, 
+    backgroundColor: '#115b8f',
+    padding: 6,
+    borderRadius: 5
+},
 });
 
-export default GardenMaintenanceDetailsScreen;
+export default ChildMindingDetailScreen ;

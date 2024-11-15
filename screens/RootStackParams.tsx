@@ -5,7 +5,7 @@ export type RootStackParamList = {
   Home: undefined;
   Courses: undefined;
   CoursesList: undefined;
-  CalculateFees: undefined;
+  CalculateScreen: undefined;
   ContactUs: undefined;
   SewingDetailsScreen: undefined;
   FirstAidDetailsScreen: undefined;
@@ -21,6 +21,7 @@ export type RootStackParamList = {
 // Define stack navigation prop types
 export type CoursesStackParamList = {
   CoursesList: undefined;
+  CalculateScreen: undefined;
   SewingDetailsScreen: undefined;
   FirstAidDetailsScreen: undefined;
   ChildMindingDetailsScreen: undefined;
